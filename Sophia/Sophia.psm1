@@ -472,7 +472,7 @@ function EnableTailoredExperiences
 # Отключить поиск через Bing в меню "Пуск" (только для США)
 function DisableBingSearch
 {
-	if ((Get-WinHomeLocation).GeoId -eq 244)
+	if ((Get-WinHomeLocation).GeoId -eq 244 -or (Get-WinHomeLocation).GeoId -eq 113)
 	{
 		if (-not (Test-Path HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer))
 		{
@@ -486,7 +486,7 @@ function DisableBingSearch
 # Включить в меню "Пуск" поиск через Bing (только для США)
 function EnableBingSearch
 {
-	if ((Get-WinHomeLocation).GeoId -eq 244)
+	if ((Get-WinHomeLocation).GeoId -eq 244 -or (Get-WinHomeLocation).GeoId -eq 113)
 	{
 		Remove-ItemProperty -Path HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer -Name DisableSearchBoxSuggestions -Force -ErrorAction SilentlyContinue
 	}
