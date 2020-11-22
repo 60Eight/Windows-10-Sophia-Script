@@ -1,21 +1,53 @@
 <div align="center">
   <h1>Windows 10 Sophia Script</h1>
 
-**"Windows 10 Sophia Script" is a PowerShell module for Windows 10 fine-tuning and automating the routine tasks** 🏆
+**A PowerShell module for Windows 10 fine-tuning and automating the routine tasks** 🏆
 
 ![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-5.1-brightgreen.svg)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b1ce4ce852f148a88c47ea33ad172044)](https://www.codacy.com/manual/farag2/Windows-10-Sophia-Script)
 ![GitHub All Releases](https://img.shields.io/github/downloads/farag2/Windows-10-Setup-Script/total)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/farag2/Windows-10-Sophia-Script)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/farag2/Windows-10-Sophia-Script) [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q51QUJC)
 
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q51QUJC)
+Available in 
+<img width="25px" src="https://flaglane.com/download/british-flag/british-flag.svg"></img>
+<img width="20px" src="https://flaglane.com/download/chinese-flag/chinese-flag-graphic.png"></img>
+<img width="22px" src="https://flaglane.com/download/german-flag/german-flag.svg"></img>
+<img width="20px" src="https://flaglane.com/download/french-flag/french-flag.svg"></img>
+<img width="20px" src="https://flaglane.com/download/italian-flag/italian-flag.svg"></img>
+<img width="23px" src="https://flaglane.com/download/russian-flag/russian-flag.svg"></img>
+<img width="20px" src="https://flaglane.com/download/ukrainian-flag/ukrainian-flag.svg"></img>
+<img width="21px" src="https://flaglane.com/download/turkish-flag/turkish-flag.svg"></img>
 </div>
+
+<hr>
+<p align="center">
+	&bull;
+	<a href="https://github.com/farag2/Windows-10-Sophia-Script/releases"><b>DOWNLOAD</b></a>
+	&bull;
+	<a href="#screenshots">Screenshots</a>
+	&bull;
+	<a href="#sophia-script-in-action">Video</a>
+	&bull;
+	<a href="#core-features">Core features</a>
+	&bull;
+	<a href="#usage">Usage</a>
+	&bull;
+	<a href="#how-to-translate">How to translate</a>
+	&bull;
+	<a href="#supported-windows-10-versions">Supported Windows 10 versions</a>
+</p>
+<hr>
 
 <table>
 	<tr>
 		<td>
 			<a href="https://youtu.be/8E6OT_QcHaU?t=370">
 				<img alt="Qries" src="https://i.imgur.com/mADOh3c.png">
+			</a>
+		</td>
+		<td>
+			<a href="https://benchtweakgaming.com/2020/11/12/windows-10-debloat-tool/">
+				<img alt="Qries" src="https://benchtweakgaming.com/wp-content/uploads/2020/10/cropped-LOGO_btg_CLEAN_WITH_WORDS_90PX_CUT-3.png">
 			</a>
 		</td>
 		<td>
@@ -144,27 +176,23 @@ To run the script:
 
 |Version|Code name|   Marketing name   |Build | Arch |      Editions     | Script version |
 |:-----:|:-------:|:------------------:|:----:|:----:|:-----------------:|:--------------:|
-| 2009  |  20H2   |October 2020 Update |19042 |  x64 |Home/Pro/Enterprise|[5.1.1](https://github.com/farag2/Windows-10-Sophia-Script/releases/latest)|
-| 2004  |  20H1   |   May 2020 Update  |19041 |  x64 |Home/Pro/Enterprise|[5.1.1](https://github.com/farag2/Windows-10-Sophia-Script/releases/latest)|
-| 1909  |  19H2   |November 2019 Update|18363 |  x64 |Home/Pro/Enterprise|[4.5](https://github.com/farag2/Windows-10-Sophia-Script/tree/master/4.x%20(outdated)/190x)|
-| 1903  |  19H1   |   May 2019 Update  |18362 |  x64 |Home/Pro/Enterprise|[4.5](https://github.com/farag2/Windows-10-Sophia-Script/tree/master/4.x%20(outdated)/190x)|
+| 2009  |  20H2   |October 2020 Update |19042 |  x64 |Home/Pro/Enterprise|[5.2](https://github.com/farag2/Windows-10-Sophia-Script/releases/latest)|
+| 2004  |  20H1   |   May 2020 Update  |19041 |  x64 |Home/Pro/Enterprise|[5.2](https://github.com/farag2/Windows-10-Sophia-Script/releases/latest)|
+| 1909  |  19H2   |November 2019 Update|18363 |  x64 |Home/Pro/Enterprise|[4.5, deprecated](https://github.com/farag2/Windows-10-Sophia-Script/tree/master/4.x%20(outdated)/190x)|
+| 1903  |  19H1   |   May 2019 Update  |18362 |  x64 |Home/Pro/Enterprise|[4.5, deprecated](https://github.com/farag2/Windows-10-Sophia-Script/tree/master/4.x%20(outdated)/190x)|
 | 1809  |         |LTSC Enterprise 2019|17763 |  x64 |   Enterprise      |[4.5](https://github.com/farag2/Windows-10-Sophia-Script/tree/master/LTSC)|
 
 ## GUI version (C#)
 
 [oz-zo](https://github.com/oz-zo) still cooking (moved to the private repository)
 
-## 21H1 test version
-https://gist.github.com/farag2/5a6d9952247aefe42ba81a9d95507765
-
 ## Microsoft Docs
 
 * [Release information](https://docs.microsoft.com/en-us/windows/release-information)
-* [Known issues for 2004](https://docs.microsoft.com/ru-ru/windows/release-information/status-windows-10-2004)
+* [Known issues for 20H2](https://docs.microsoft.com/ru-ru/windows/release-information/status-windows-10-20h2)
 
 ## Ask a question on
 
 * [Ru-Board](http://forum.ru-board.com/topic.cgi?forum=62&topic=30617#15)
-* [4PDA](https://4pda.ru/forum/index.php?s=&showtopic=523489&view=findpost&p=95909388)
 * [My Digital Life](https://forums.mydigitallife.net/threads/powershell-script-setup-windows-10.81675/)
 * [Reddit](https://www.reddit.com/r/PowerShell/comments/go2n5v/powershell_script_setup_windows_10/)
