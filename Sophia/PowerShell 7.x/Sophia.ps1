@@ -35,7 +35,7 @@
 #>
 
 #Requires -RunAsAdministrator
-#Requires -Version 5.1
+#Requires -Version 7.1
 
 Clear-Host
 

@@ -1,22 +1,16 @@
 <div align="center">
-  <h1>Windows 10 Sophia Script</h1>
+  <h1>Sophia Script</h1>
 
-**A PowerShell module for Windows 10 fine-tuning and automating the routine tasks** 🏆
+**A PowerShell module for Windows 10 fine-tuning and automating the routine tasks** :trophy:
 
-![Minimum Supported PowerShell Version](https://img.shields.io/badge/PowerShell-5.1-brightgreen.svg)
+![PowerShell](https://img.shields.io/badge/PowerShell%205.1%20&%207.1-Ready-blue.svg?style=flat)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b1ce4ce852f148a88c47ea33ad172044)](https://www.codacy.com/manual/farag2/Windows-10-Sophia-Script)
-![GitHub All Releases](https://img.shields.io/github/downloads/farag2/Windows-10-Setup-Script/total)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/farag2/Windows-10-Sophia-Script) [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q51QUJC)
+[![Github stats](https://img.shields.io/github/downloads/farag2/Windows-10-Setup-Script/total.svg?label=downloads%20%28since%20May%202020%29)](https://github.com/farag2/Windows-10-Sophia-Script/releases)
+[![latest version](https://img.shields.io/github/v/release/farag2/Windows-10-Sophia-Script)](https://github.com/farag2/Windows-10-Sophia-Script/releases)
 
-Available in 
-<img width="25px" src="https://flaglane.com/download/british-flag/british-flag.svg"></img>
-<img width="20px" src="https://flaglane.com/download/chinese-flag/chinese-flag-graphic.png"></img>
-<img width="22px" src="https://flaglane.com/download/german-flag/german-flag.svg"></img>
-<img width="20px" src="https://flaglane.com/download/french-flag/french-flag.svg"></img>
-<img width="20px" src="https://flaglane.com/download/italian-flag/italian-flag.svg"></img>
-<img width="23px" src="https://flaglane.com/download/russian-flag/russian-flag.svg"></img>
-<img width="20px" src="https://flaglane.com/download/ukrainian-flag/ukrainian-flag.svg"></img>
-<img width="21px" src="https://flaglane.com/download/turkish-flag/turkish-flag.svg"></img>
+Available in: :uk: :cn: :de: :fr: :it: :ru: :ukraine: :tr: :es:
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q51QUJC)
 </div>
 
 <hr>
@@ -83,11 +77,18 @@ Available in
 	</tr>
 </table>
 
-## ⚠️ Before running ⚠️
+## :fire: Before running :fire:
 
-* Due to the fact that the script includes more than **270** functions, you must read the entire **preset file** carefully and **comment out/uncomment** those functions that you do/do not want to be executed. Every tweak in a preset file has its' corresponding function to **restore the default settings**.
+* Due to the fact that the script includes more than **150** functions with different arguments, you must read the entire **Sophia.ps1** carefully and **comment out/uncomment** those functions that you do/do not want to be executed. Every tweak in the preset file has its' corresponding function to **restore the default settings**.
 * Running the script is best done on a fresh install because running it on **wrong** tweaked system may result in errors occurring.
-* Some third-party antiviruses flag this script or its' part as malicious one. This is a **false positive** due to [$EncodedScript](https://github.com/farag2/Windows-10-Sophia-Script/blob/0f9bbee7e1d43f487eb0855e0d1e44ff569fc4a9/200x/2004.ps1#L2837) variable. You can read more about in "CreateCleanUpTask" function. You might need to disable tamper protection from your antivirus settings, re-enable it after running the script, and reboot.
+
+## Supported Windows 10 versions
+
+|Version|Code name|   Marketing name   |Build | Arch |      Editions     | Script version |
+|:-----:|:-------:|:------------------:|:----:|:----:|:-----------------:|:--------------:|
+| 2009  |  20H2   |October 2020 Update |19042 |  x64 |Home/Pro/Enterprise|[5.3.1](https://github.com/farag2/Windows-10-Sophia-Script/releases/latest)|
+| 2004  |  20H1   |   May 2020 Update  |19041 |  x64 |Home/Pro/Enterprise|[5.3.1](https://github.com/farag2/Windows-10-Sophia-Script/releases/latest)|
+| 1809  |         |LTSC Enterprise 2019|17763 |  x64 |   Enterprise      |[5.0](https://github.com/farag2/Windows-10-Sophia-Script/releases/latest)|
 
 ## Screenshots
 
@@ -96,6 +97,8 @@ Available in
   
 ![Image](https://i.imgur.com/5up2HrJ.png)
 ![Image](https://i.imgur.com/AXY12aJ.png)
+![Image](https://i.imgur.com/kUONPI2.png)
+![Image](https://i.imgur.com/DpV0UJw.png)
 </details>
 
 ## Sophia Script in Action
@@ -105,12 +108,12 @@ Available in
 ## Core features
 
 * Set up Privacy & Telemetry;
-* Turn off diagnostics tracking scheduled tasks;
+* Turn off diagnostics tracking scheduled tasks with pop-up form written in [WPF](#Screenshots);
 * Set up UI & Personalization;
 * Uninstall OneDrive "correctly";
 * Interactive prompts;
 * Change %TEMP% environment variable path to %SystemDrive%\Temp
-* Change location of the user folders programmatically (without moving user files) within interactive menu using up/down arrows and Enter key to make a selection
+* Change location of the user folders programmatically (without moving user files) within interactive menu using arrows to select a drive
   * "Desktop";
   * "Documents";
   * "Downloads";
@@ -143,7 +146,7 @@ To run the script:
 * Download [up-to-date version](https://github.com/farag2/Windows-10-Sophia-Script/releases/latest);
 * Expand the archive;
 * Open folder with the expanded archive;
-* Look through the preset file to configure functions that you want to be ran;
+* Look through the ```.\Sophia.ps1``` file to configure functions that you want to be ran;
   * Comment out function with the ```#``` char if you don't want it to be ran;
   * Uncomment function by removing the ```#``` char if you want it to be ran.
 * Click "File" in File Explorer, hover over "Open Windows PowerShell", and select "Open Windows PowerShell as Administrator" [(how-to with screenshots)](https://www.howtogeek.com/662611/9-ways-to-open-powershell-in-windows-10/);
@@ -153,17 +156,12 @@ To run the script:
   Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
   ```
 
-* Type
-
-```
-.\Sophia.ps1
-```
-
+* Type ```.\Sophia.ps1```
 * Press Enter
 
 ## How to translate
 
-* Get your OS UI culture by
+* Get your OS UI culture byCommunity Edition
 
    ```powershell
    $PSUICulture
@@ -172,27 +170,12 @@ To run the script:
 * Create a folder with the UI culture name;
 * Place your localized Sophia.psd1 file into this folder
 
-## Supported Windows 10 versions
-
-|Version|Code name|   Marketing name   |Build | Arch |      Editions     | Script version |
-|:-----:|:-------:|:------------------:|:----:|:----:|:-----------------:|:--------------:|
-| 2009  |  20H2   |October 2020 Update |19042 |  x64 |Home/Pro/Enterprise|[5.2](https://github.com/farag2/Windows-10-Sophia-Script/releases/latest)|
-| 2004  |  20H1   |   May 2020 Update  |19041 |  x64 |Home/Pro/Enterprise|[5.2](https://github.com/farag2/Windows-10-Sophia-Script/releases/latest)|
-| 1909  |  19H2   |November 2019 Update|18363 |  x64 |Home/Pro/Enterprise|[4.5, deprecated](https://github.com/farag2/Windows-10-Sophia-Script/tree/master/4.x%20(outdated)/190x)|
-| 1903  |  19H1   |   May 2019 Update  |18362 |  x64 |Home/Pro/Enterprise|[4.5, deprecated](https://github.com/farag2/Windows-10-Sophia-Script/tree/master/4.x%20(outdated)/190x)|
-| 1809  |         |LTSC Enterprise 2019|17763 |  x64 |   Enterprise      |[4.5](https://github.com/farag2/Windows-10-Sophia-Script/tree/master/LTSC)|
-
-## GUI version (C#)
-
-[oz-zo](https://github.com/oz-zo) still cooking (moved to the private repository)
-
-## Microsoft Docs
-
-* [Release information](https://docs.microsoft.com/en-us/windows/release-information)
-* [Known issues for 20H2](https://docs.microsoft.com/ru-ru/windows/release-information/status-windows-10-20h2)
-
 ## Ask a question on
 
 * [Ru-Board](http://forum.ru-board.com/topic.cgi?forum=62&topic=30617#15)
-* [My Digital Life](https://forums.mydigitallife.net/threads/powershell-script-setup-windows-10.81675/)
-* [Reddit](https://www.reddit.com/r/PowerShell/comments/go2n5v/powershell_script_setup_windows_10/)
+* [My Digital Life](https://forums.mydigitallife.net/threads/powershell-windows-10-sophia-script.81675/)
+* [Reddit (archived)](https://www.reddit.com/r/PowerShell/comments/go2n5v/powershell_script_setup_windows_10/)
+
+## SophiApp Community Edition (C# + WPF)
+
+Internal build by [oz-zo](https://github.com/oz-zo) being compiled in the [SophiApp](https://github.com/farag2/SophiApp) repository every Saturday within Github Actions

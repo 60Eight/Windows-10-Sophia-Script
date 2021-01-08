@@ -1,4 +1,4 @@
-﻿<#
+<#
 	.SYNOPSIS
 	"Windows 10 Sophia Script" is a PowerShell module for Windows 10 fine-tuning and automating the routine tasks
 
@@ -64,6 +64,16 @@ function Checkings
 	# Unblock all files in the folder by removing the Zone.Identifier alternate data stream with a value of "3"
 	# Разблокировать все файлы в папке, удалив альтернативный потоки данных Zone.Identifier со значением "3"
 	Get-ChildItem -Path $PSScriptRoot -Recurse -Force | Unblock-File -Confirm:$false
+
+	# Import PowerShell 5.1 modules
+	# Импорт модулей PowerShell 5.1
+	switch ($PSVersionTable.PSVersion.Major)
+	{
+		"7"
+		{
+			Import-Module -Name Microsoft.PowerShell.Management, PackageManagement, Appx -UseWindowsPowerShell
+		}
+	}
 
 	# Turn off Controlled folder access to let the script proceed
 	# Выключить контролируемый доступ к папкам
@@ -3244,7 +3254,9 @@ function AppsLanguageSwitch
 # Удалить OneDrive
 function UninstallOneDrive
 {
-	[string]$UninstallString = Get-Package -Name "Microsoft OneDrive" -ProviderName Programs -ErrorAction Ignore | ForEach-Object -Process {$_.Meta.Attributes["UninstallString"]}
+	[xml]$Uninstall = Get-Package -Name "Microsoft OneDrive" -ProviderName Programs -ErrorAction Ignore | ForEach-Object -Process {$_.SwidTagText}
+	[xml]$Uninstall = $Uninstall.SoftwareIdentity.InnerXml
+	[string]$UninstallString = $Uninstall.Meta.UninstallString
 	if ($UninstallString)
 	{
 		Write-Verbose -Message $Localization.OneDriveUninstalling -Verbose
@@ -3738,6 +3750,10 @@ function TempFolder
 			{
 				New-Item -Path $env:SystemDrive\Temp -ItemType Directory -Force
 			}
+
+			# Copy all imported module folders to the new temp folder. Only when using the function within PowerShell 7.x
+			# Скопировать все папки импортированных модулей в новое расположение временных файлов. Только при использовании функции в рамках PowerShell 7.x
+			Get-ChildItem -Path $env:LOCALAPPDATA\Temp -Force | Where-Object -FilterScript {$_.Name -like "*remoteIpMoProxy*"} | ForEach-Object -Process {Copy-Item $_.FullName -Destination $env:SystemDrive\Temp -Recurse -Force}
 
 			Remove-Item -Path $env:SystemRoot\Temp -Recurse -Force -ErrorAction Ignore
 			Get-Item -Path $env:LOCALAPPDATA\Temp -Force -ErrorAction Ignore | Where-Object -FilterScript {$_.LinkType -ne "SymbolicLink"} | Remove-Item -Recurse -Force -ErrorAction Ignore
@@ -7057,7 +7073,7 @@ swap=1
 "@
 				# Saving .wslconfig in UTF-8 encoding
 				# Сохраняем .wslconfig в кодировке UTF-8
-				Set-Content -Path "$env:USERPROFILE\.wslconfig" -Value $WSLConfig -Force
+				Set-Content -Path "$env:USERPROFILE\.wslconfig" -Value $WSLConfig -Encoding utf8 -Force
 			}
 		}
 		"Disable"
@@ -7084,7 +7100,7 @@ swap=0
 "@
 					# Saving .wslconfig in UTF-8 encoding
 					# Сохраняем .wslconfig в кодировке UTF-8
-					Set-Content -Path "$env:USERPROFILE\.wslconfig" -Value $WSLConfig -Force
+					Set-Content -Path "$env:USERPROFILE\.wslconfig" -Value $WSLConfig -Encoding utf8 -Force
 				}
 			}
 		}
@@ -7241,15 +7257,15 @@ function RunCMDShortcut
 	{
 		"Elevated"
 		{
-			[byte[]]$bytes = Get-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -Encoding Byte -Raw
+			[byte[]]$bytes = Get-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -AsByteStream -Raw
 			$bytes[0x15] = $bytes[0x15] -bor 0x20
-			Set-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -Value $bytes -Encoding Byte -Force
+			Set-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -Value $bytes -AsByteStream -Force
 		}
 		"NonElevated"
 		{
-			[byte[]]$bytes = Get-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -Encoding Byte -Raw
+			[byte[]]$bytes = Get-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -AsByteStream -Raw
 			$bytes[0x15] = $bytes[0x15] -bxor 0x20
-			Set-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -Value $bytes -Encoding Byte -Force
+			Set-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -Value $bytes -AsByteStream -Force
 		}
 	}
 }
@@ -7271,7 +7287,7 @@ function UnpinAllStartTiles
 	$StartMenuLayoutPath = "$env:TEMP\StartMenuLayout.xml"
 	# Saving StartMenuLayout.xml in UTF-8 encoding
 	# Сохраняем StartMenuLayout.xml в кодировке UTF-8
-	Set-Content -Path $StartMenuLayoutPath -Value $StartMenuLayout -Force
+	Set-Content -Path $StartMenuLayoutPath -Value $StartMenuLayout -Encoding utf8 -Force
 
 	# Temporarily disable changing the Start menu layout
 	# Временно выключаем возможность редактировать начальный экран меню "Пуск"
@@ -7653,6 +7669,8 @@ function UninstallUWPApps
 
 	function UninstallButton
 	{
+		Write-Verbose -Message $Localization.Patient -Verbose
+
 		[void]$Window.Close()
 		$OFS = "|"
 		if ($CheckboxRemoveAll.IsChecked)
@@ -8310,7 +8328,7 @@ function SoftwareDistributionTask
 Get-ChildItem -Path $env:SystemRoot\SoftwareDistribution\Download -Recurse -Force | Remove-Item -Recurse -Force
 "@
 			$Action = New-ScheduledTaskAction -Execute powershell.exe -Argument $Argument
-			$Trigger = New-JobTrigger -Weekly -WeeksInterval 4 -DaysOfWeek Thursday -At 9am
+			$Trigger = New-ScheduledTaskTrigger -Daily -DaysInterval 90 -At 9am
 			$Settings = New-ScheduledTaskSettingsSet -Compatibility Win8 -StartWhenAvailable
 			$Principal = New-ScheduledTaskPrincipal -UserId "NT AUTHORITY\SYSTEM" -RunLevel Highest
 			$Description = $Localization.FolderTaskDescription -f "$env:SystemRoot\SoftwareDistribution\Download"
@@ -8989,7 +9007,7 @@ function EventViewerCustomView
 
 			# Saving ProcessCreation.xml in UTF-8 encoding
 			# Сохраняем ProcessCreation.xml в кодировке UTF-8
-			Set-Content -Path "$env:ProgramData\Microsoft\Event Viewer\Views\ProcessCreation.xml" -Value $XML -Force
+			Set-Content -Path "$env:ProgramData\Microsoft\Event Viewer\Views\ProcessCreation.xml" -Value $XML -Encoding utf8 -Force
 		}
 	}
 }
